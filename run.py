@@ -17,7 +17,8 @@ data = {
 }
 
 # response = requests.post("http://127.0.0.1:8000/user", json=data)
-response = requests.get("http://127.0.0.1:8000/user/user3")
+# response = requests.get("http://127.0.0.1:8000/user/user3")
+response = requests.delete("http://127.0.0.1:8000/user/user2")
 
 # Print the response content
 print(response.status_code)  # HTTP status code
