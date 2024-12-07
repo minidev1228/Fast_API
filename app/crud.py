@@ -1,13 +1,14 @@
 from sqlalchemy.orm import Session
 from sqlalchemy import Boolean, Column, ForeignKey, Integer, String, DateTime
+from fastapi import HTTPException
 from . import models,schemas
 
-
-# def get_user(db: Session, user_id: int):
-#     return db.query(models.User).filter(models.User.id == user_id).first()
-
-
 def get_user_by_id(db: Session, user_id: str):
+    if user_id == "all":
+        users = db.query(models.User).all()  # Query to get all users
+        if not users:  # Check if empty
+            raise HTTPException(status_code=404, detail="No users found in the database.")
+        return users
     return db.query(models.User).filter(models.User.user_id == user_id).first()
 
 def delete_user_by_id(db: Session, user_id: str):
@@ -18,12 +19,6 @@ def delete_user_by_id(db: Session, user_id: str):
     db.commit()  # Commit the transaction to persist the deletion
 
     return {"message": "User deleted successfully"}
-
-
-# def get_users(db: Session, skip:int=0, limit:int=100):
-#     # return db.query(models.User).offset(skip).limit(limit).all()
-#     return db.query(models.User).offset(skip).limit(limit).all()
-
 
 def create_user(db: Session, user:schemas.UserCreate):
     db_user = models.User(
@@ -43,21 +38,3 @@ def create_user(db: Session, user:schemas.UserCreate):
     db.commit()
     db.refresh(db_user)
     return {"message": "Success"}
-
-
-# def get_todos(db: Session, skip:int=0, limit: int=100):
-#     return db.query(models.Todo).offset(skip).limit(limit).all()
-
-
-# def create_user_todo(db:Session, todo:schemas.TodoCreate, user_id : int):
-#     db_todo = models.Todo(**todo.model_dump(),owner_id=user_id )
-#     db.add(db_todo)
-#     db.commit()
-#     db.refresh(db_todo)
-#     return db_todo
-
-
-# NOTE :
-# - add that instance object to your database session.
-# - commit the changes to the database (so that they are saved).
-# - refresh your instance (so that it contains any new data from the database, like the generated ID).
