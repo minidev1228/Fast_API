@@ -21,9 +21,9 @@ class UserSchema(BaseModel):
 
     bio: str
 
-    # created_at: datetime
+    created_at: datetime
 
-    # updated_at: datetime
+    updated_at: datetime
 
     class Config:
         orm_mode = True

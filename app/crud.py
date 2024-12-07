@@ -1,5 +1,5 @@
 from sqlalchemy.orm import Session
-
+from sqlalchemy import Boolean, Column, ForeignKey, Integer, String, DateTime
 from . import models,schemas
 
 
@@ -17,17 +17,19 @@ from . import models,schemas
 
 
 def create_user(db: Session, user:schemas.UserCreate):
-    db_user = models.User(username=user.username,
-                          password_hash=user.password_hash,
-                          email=user.email,
-                          first_name=user.first_name,
-                          last_name=user.last_name,
-                           role=user.role,
-                           profile_picture=user.profile_picture,
-                           bio=user.bio,
-                        #    created_at=user.created_at,
-                        #    updated_at=user.updated_at                       
-                        )
+    db_user = models.User(
+        user_id=user.user_id,
+        username=user.username,
+        password_hash=user.password_hash,
+        email=user.email,
+        first_name=user.first_name,
+        last_name=user.last_name,
+        role=user.role,
+        profile_picture=user.profile_picture,
+        bio=user.bio,
+        created_at=DateTime(user.created_at),
+        updated_at=DateTime(user.updated_at)                       
+    )
     db.add(db_user)
     db.commit()
     db.refresh(db_user)

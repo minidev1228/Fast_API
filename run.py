@@ -12,8 +12,8 @@ data = {
     "role": "user",
     "profile_picture": "http://example.com/profile.jpg",
     "bio": "This is a test user",
-    # "created_at": "2024-12-01T00:00:00",
-    # "updated_at": "2024-12-01T00:00:00"
+    "created_at": "2024-12-01T00:00:00",
+    "updated_at": "2024-12-01T00:00:00"
 }
 
 response = requests.post("http://127.0.0.1:8000/user", json=data)

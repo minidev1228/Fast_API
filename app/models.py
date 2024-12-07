@@ -15,8 +15,8 @@ class User(Base):
     role = Column(String(20), nullable=False)  # Example length for roles like 'admin' or 'user'
     profile_picture = Column(String(255), nullable=False)  # Adjust length for URLs or file paths
     bio = Column(String(500), nullable=False)  # Length for user bios
-    # created_at = Column(DateTime, nullable=False)
-    # updated_at = Column(DateTime, nullable=False)
+    created_at = Column(DateTime, nullable=False)
+    updated_at = Column(DateTime, nullable=False)
 
 class SportType(Base):
     __tablename__ = "sporttype"
