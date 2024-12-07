@@ -27,13 +27,13 @@ def create_user(db: Session, user:schemas.UserCreate):
         role=user.role,
         profile_picture=user.profile_picture,
         bio=user.bio,
-        created_at=DateTime(user.created_at),
-        updated_at=DateTime(user.updated_at)                       
+        created_at=user.created_at,
+        updated_at=user.updated_at                       
     )
     db.add(db_user)
     db.commit()
     db.refresh(db_user)
-    return user
+    return {"message": "Success"}
 
 
 # def get_todos(db: Session, skip:int=0, limit: int=100):

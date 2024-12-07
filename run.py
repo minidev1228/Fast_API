@@ -3,7 +3,7 @@ import requests
 url = 'http://127.0.0.1:8000'
 
 data = {
-    "user_id": "test-user-id",
+    "user_id": "user2",
     "username": "testuser",
     "password_hash": "hashedpassword",
     "email": "testuser@example.com",
