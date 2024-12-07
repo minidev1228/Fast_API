@@ -19,19 +19,23 @@ def get_db():
 
 @app.post("/user")
 async def post_user(user:schemas.UserCreate, db:Session=Depends(get_db)):
-    # db_user = crud.get_user_by_email(db, email=user.email)
-    # if db_user:
-    #     raise HTTPException(status_code=400, detail="Email already registered")
-    # print("Request is received!")
-    # return user
+    db_user = crud.get_user_by_id(db, user_id=user.user_id)
+    if db_user:
+        raise HTTPException(status_code=400, detail="Email already registered")
     return crud.create_user(db=db,user=user)
 
 
-# @app.get("/users/", response_model=list[schemas.User])
-# def get_users(skip:int=0, limit:int=0, db:Session=Depends(get_db)):
-#     users = crud.get_users(db,skip=skip,limit=limit)
-#     return users
+@app.get("/user/{user_id}/")
+async def get_user_by_id(user_id:str,db:Session=Depends(get_db)):
+    print(user_id)
+    user = crud.get_user_by_id(db, user_id=user_id)
+    return user
 
+@app.delete("/user/{user_id}/")
+async def delete_user_by_id(user_id:str,db:Session=Depends(get_db)):
+    print(user_id)
+    user = crud.delete_user_by_id(db, user_id=user_id)
+    return user
 
 # @app.get("/users/{user_id}/",response_model=schemas.User)
 # def get_user(user_id:int, db:Session=Depends(get_db)):

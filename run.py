@@ -3,7 +3,7 @@ import requests
 url = 'http://127.0.0.1:8000'
 
 data = {
-    "user_id": "user2",
+    "user_id": "user3",
     "username": "testuser",
     "password_hash": "hashedpassword",
     "email": "testuser@example.com",
@@ -16,7 +16,8 @@ data = {
     "updated_at": "2024-12-01T00:00:00"
 }
 
-response = requests.post("http://127.0.0.1:8000/user", json=data)
+# response = requests.post("http://127.0.0.1:8000/user", json=data)
+response = requests.get("http://127.0.0.1:8000/user/user3")
 
 # Print the response content
 print(response.status_code)  # HTTP status code
